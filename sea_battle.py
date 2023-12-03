@@ -16,6 +16,27 @@ def main_menu():
     print()
     choose_action()
 
+def choose_action():
+    action = int(input('Choose action (1/2): '))
+    if action == 1:
+        cls()
+        sea_battle()
+    elif action == 2:
+        if all_players:
+            print('List of players is empty. Become first!')
+            choose_action()
+        else:
+            for row in all_players:
+                print(' '.join([str(elem) for elem in row]))
+            print()
+            menu = int(input('For going back to Main menu enter 1: '))
+            if menu == 1:
+                cls()
+                main_menu()
+    else:
+        print('There is no such action. PLease, try again.')
+        choose_action()
+
 def place_ships():
     list_ships = []
     ships1 = [[0, 0, 0, 0, 0, 0, 0],

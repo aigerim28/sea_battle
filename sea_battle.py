@@ -1,10 +1,14 @@
-hits = 0
+import random
+
+all_players = []
 y_domain = [0, 'A', 'B', 'C', 'D', 'E', 'F', 'G']
 console = [[0 for _ in range(8)] for _ in range(8)]
 console[0] = y_domain
 for i in range(1, 8):
     console[i][0] = i
-ships = []
+
+def cls():
+    print('\n' * 100)
 
 def place_ships():
     list_ships = []

@@ -10,6 +10,12 @@ for i in range(1, 8):
 def cls():
     print('\n' * 100)
 
+def main_menu():
+    print('You are in Main menu. ')
+    print('\nActions: \n1 - Start a game \n2 - All players')
+    print()
+    choose_action()
+
 def place_ships():
     list_ships = []
     ships1 = [[0, 0, 0, 0, 0, 0, 0],

@@ -137,16 +137,7 @@ def place_ships():
     list_ships.append(ships8)
     return random.choice(list_ships)
 
-def check_point(ships, x, y):
-    if ships[x - 1][y - 1] > 0:
-        print('You have hit the ship!')
-        ships[x - 1][y - 1] = 0
-        console[x][y] = 'x'
-    else:
-        print('Oops! There was no ship...')
-        ships[x - 1][y - 1] = 0
-        console[x][y] = '-'
-    
+def hit_point(ships, x, y):
     
 
 def sea_battle(ships):

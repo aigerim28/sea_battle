@@ -143,6 +143,16 @@ def hit_point(ships, x, y):
         ships[x - 1][y - 1] = 0
         console[x][y] = 'x'
         return True
+    elif ships[x + 1][y - 1] == 2:
+        ships[x + 1][y - 1] = 0
+        console[x][y] = 'x'
+        item = 2
+        if item in ships[x + 1] or ships[x + 2][y - 1] == 2 or ships[x][y - 1] == 2:
+            print('You have hit the ship!')
+            return True
+        else:
+            print('You have crushed a ship!')
+            return True
 
 def sea_battle(ships):
     name = input('Enter your name: ')

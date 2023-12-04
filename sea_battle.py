@@ -1,18 +1,16 @@
 import random
 
 all_players = []
-y_domain = [0, 'A', 'B', 'C', 'D', 'E', 'F', 'G']
-console = [[0 for _ in range(8)] for _ in range(8)]
-console[0] = y_domain
-for i in range(1, 8):
-    console[i][0] = i
 
 def cls():
     print('\n' * 100)
 
+def custom_key(players_list):
+    return players_list[1]
+
 def main_menu():
     print('You are in Main menu. ')
-    print('\nActions: \n1 - Start a game \n2 - All players')
+    print('\nActions: \n1 - Start a game \n2 - See the list of all players')
     print()
     choose_action()
 
@@ -23,12 +21,21 @@ def choose_action():
         sea_battle()
     elif action == 2:
         if all_players:
+            cls()
             print('List of players is empty. Become first!')
-            choose_action()
-        else:
-            for row in all_players:
-                print(' '.join([str(elem) for elem in row]))
             print()
+            menu = int(input('For going back to Main menu enter 1: '))
+            if menu == 1:
+                cls()
+                main_menu()
+        else:
+            all_players.sort(key=custom_key, reverse=True)
+            cls()
+            print('List of all players:')
+            for i in range(len(all_players)):
+                print(f'{i + 1}. {all_players[i][0]} - {all_players[i][1]}')
+            print()
+            
             menu = int(input('For going back to Main menu enter 1: '))
             if menu == 1:
                 cls()
@@ -36,6 +43,14 @@ def choose_action():
     else:
         print('There is no such action. PLease, try again.')
         choose_action()
+
+def create_console():
+    y_domain = [0, 'A', 'B', 'C', 'D', 'E', 'F', 'G']
+    console = [[0 for _ in range(8)] for _ in range(8)]
+    console[0] = y_domain
+    for i in range(1, 8):
+        console[i][0] = i
+    return console
 
 def place_ships():
     list_ships = []
@@ -137,7 +152,7 @@ def place_ships():
     list_ships.append(ships8)
     return random.choice(list_ships)
 
-def hit_point(ships, x, y):
+def hit_point(console, ships, x, y):
     if ships[x + 1][y - 1] == 1:
         print('You have crushed a ship!')
         ships[x - 1][y - 1] = 0
@@ -173,9 +188,11 @@ def hit_point(ships, x, y):
 def sea_battle(ships):
     result = []
     name = input('Enter your name: ')
-    print('Game starts!')
+    print(f'Welcome to the game, {name}!')
     print()
-    
+
+    y_domain = [0, 'A', 'B', 'C', 'D', 'E', 'F', 'G']
+    console = create_console()
     ships = place_ships()
     hits = 0
     total_points = 0
@@ -183,32 +200,36 @@ def sea_battle(ships):
     while total_points < 11:
         for row in console:
             print(' '.join([str(elem) for elem in row]))
-        print('\nEnter place (for example: "A; 1") :')
+        print('\nEnter place (for example: "A;1") :')
         y_letter, x = input().split(';')
         
         y = y_domain.index(y_letter)
         x = int(x)
         
         if console[x][y] == '-' or console[x][y] == 'x':
-            print('You have already hit this point, please, try to hit another place')
+            print()
+            print('You have already hit this point, please, enter another place: ')
             y_letter, x = input().split(';')
             y = y_domain.index(y_letter)
             x = int(x)
         
-        if hit_point(ships, x, y) == True:
+        if hit_point(console, ships, x, y) == True:
             total_points += 1
         hits += 1
-    if summa == 0:
-        print('Game is over.')
+    if total_points == 11:
+        print('Congratulations! You have crushed all ships!')
         print('Quantity of hits you made:', hits)
+
+        result.append(name)
+        result.append(hits)
+        all_players.append(result)
+        
         will = int(input('\nWould you like to play one more time? (Enter 1/0)'))
         if will == 1:
-            place_ships()
-            sea_battle(ships)
+            sea_battle()
+        else:
+            main_menu()
 
 
-#place_ships()
-#sea_battle(ships)
-y_letter = input()
-y = y_domain.index(y_letter)
-print(y)
+main_menu()
+

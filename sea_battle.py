@@ -138,7 +138,11 @@ def place_ships():
     return random.choice(list_ships)
 
 def hit_point(ships, x, y):
-    
+    if ships[x + 1][y - 1] == 1:
+        print('You have crushed a ship!')
+        ships[x - 1][y - 1] = 0
+        console[x][y] = 'x'
+        return True
 
 def sea_battle(ships):
     name = input('Enter your name: ')

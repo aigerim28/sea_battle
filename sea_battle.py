@@ -12,7 +12,9 @@ def custom_key(players_list):
     return players_list[1]
 
 
-#This function creates a console which will be shown to user, with first row consisting of letters A-G and first column with numbers 1-7
+#This function creates a console which will be 
+#shown to user, with first row consisting of letters A-G and 
+#first column with numbers 1-7
 def create_console():
     console = [[0 for _ in range(8)] for _ in range(8)]
     console[0] = [0, 'A', 'B', 'C', 'D', 'E', 'F', 'G']
@@ -20,7 +22,9 @@ def create_console():
         console[i][0] = i
     return console
 
-#Function for creating 8 different maps where ships are located and it gives to user randomly one of them.
+#Function for creating 8 different maps where ships are 
+#located and it gives 
+#to user randomly one of them.
 def place_ships():
     list_ships = []
     ships1 = [[0, 0, 0, 0, 0, 0, 0],
@@ -127,9 +131,11 @@ def place_ships():
 #prints such message. 
 def hit_point(console, ships, x, y):
     if ships[x + 1][y - 1] == 1:
-        print('You have crushed a ship!')
         ships[x - 1][y - 1] = 0
         console[x][y] = 'x'
+        
+        print('You have crushed a ship!')
+        
         return True
     elif ships[x + 1][y - 1] == 2:
         ships[x + 1][y - 1] = 0
@@ -152,9 +158,11 @@ def hit_point(console, ships, x, y):
             print('You have crushed a ship!')
             return True
     else:
-        print('Oops! There was no ship...')
         ships[x + 1][y - 1] = 0
         console[x][y] = '-'
+        
+        print('Oops! There was no ship...')
+        
         return False
 
 #The function part where the game starts. It takes a name from user,
@@ -198,10 +206,10 @@ def sea_battle():
 
         #If we get True value (so we hit or crush ship) and we 
         #add it to variable total_point
-        if hit_point(console, ships, x, y) == True:
+        if hit_point(console, ships, x, y):
             total_points += 1
         hits += 1
-    if total_points == 11:
+    else:
         print('Congratulations! You have crushed all ships!')
         print('Quantity of hits you made:', hits)
 

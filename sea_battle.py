@@ -185,7 +185,7 @@ def hit_point(console, ships, x, y):
         return False
 
 
-def sea_battle(ships):
+def sea_battle():
     result = []
     name = input('Enter your name: ')
     print(f'Welcome to the game, {name}!')

@@ -189,6 +189,7 @@ def sea_battle():
     result = []
     name = input('Enter your name: ')
     print(f'Welcome to the game, {name}!')
+    print('\nThe point will be displayed as: \n"-" - "miss", \n"x" - "hit"')
     print()
 
     y_domain = [0, 'A', 'B', 'C', 'D', 'E', 'F', 'G']

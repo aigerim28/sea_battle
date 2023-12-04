@@ -171,15 +171,19 @@ def hit_point(ships, x, y):
 
 
 def sea_battle(ships):
+    result = []
     name = input('Enter your name: ')
+    print('Game starts!')
+    print()
     
-    summa = 0
-    summa = [[(summa + elem) for elem in row] for row in ships]
+    ships = place_ships()
+    hits = 0
+    total_points = 0
     
-    while summa != 0:
+    while total_points < 11:
         for row in console:
             print(' '.join([str(elem) for elem in row]))
-        print('Enter place (for example: "A; 1") :')
+        print('\nEnter place (for example: "A; 1") :')
         y_letter, x = input().split(';')
         
         y = y_domain.index(y_letter)
@@ -191,7 +195,7 @@ def sea_battle(ships):
             y = y_domain.index(y_letter)
             x = int(x)
         
-        check_point(ships, x, y)
+        hit_point(ships, x, y)
         hits += 1
     if summa == 0:
         print('Game is over.')

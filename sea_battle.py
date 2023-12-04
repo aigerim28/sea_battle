@@ -195,7 +195,8 @@ def sea_battle(ships):
             y = y_domain.index(y_letter)
             x = int(x)
         
-        hit_point(ships, x, y)
+        if hit_point(ships, x, y) == True:
+            total_points += 1
         hits += 1
     if summa == 0:
         print('Game is over.')
